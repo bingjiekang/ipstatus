@@ -9,15 +9,23 @@
   <link rel="stylesheet" href="./static/layui/css/layui.css" tppabs="./static/layui/css/layui.css"  media="all">
   <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
 </head>
-<style>
-    .table-style {argin-left: 20px;argin-right: 20px;}
-</style>
-<body>
+<!-- <style>
+    .div {padding:5px}
+</style> -->
+<style> 
+    .divcss5{ 
+    padding-left:20px;padding-right:30px;padding-top:40px;padding-bottom:50px
+    } 
+</style> 
+<body >
+
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
   <legend>IP地址查看</legend>
-</fieldset>   
+</fieldset>  
 
-<table class="layui-hide" id="test" ></table>
+<div class="divcss5">
+    <table class="layui-hide" id="test" ></table>
+</div>
           
 <script src="./static/layui/layui.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述 JS 路径需要改成你本地的 -->
@@ -34,7 +42,17 @@
           ,{field:'ip', width:80, title: 'IP地址',width: '25%'}
           ,{field:'isp_domain', title: '归属运营商', width: '25%'} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
         ]]
+        ,parseData:function(res){
+            if(res.code == 1){
+                alert("查询不到!请在网址后输入正确ip进行查询")
+            }
+        }
+        
       });
+    //   error("查询不到!请在网址后输入ip测试");
+    //   if (res.code == 1){
+    //     alert("查询不到!请在网址后输入ip测试")
+    //   }
     });
 </script>
 

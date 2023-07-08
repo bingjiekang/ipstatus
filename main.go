@@ -57,7 +57,11 @@ func query(ctx iris.Context) {
 	fmt.Printf("query[%s]\n", ip)
 	city, err := db.FindMap(ip, "CN")
 	if err != nil {
-		ctx.JSON(map[string]string{"status": "0", "msg": "请检查ip地址是否正确"})
+		// ctx.JSON(map[string]string{"status": "0", "msg": "请检查ip地址是否正确"})
+		sult["code"] = 1
+		sult["msg"] = "处理错误"
+		sult["count"] = 1
+		sult["data"] = temp
 	} else {
 		city["status"] = "1"
 		city["ip"] = ip
@@ -66,16 +70,16 @@ func query(ctx iris.Context) {
 		sult["count"] = 1
 		temp = append(temp, city)
 		sult["data"] = temp
-		// 保存成json数据
-		err := saveJSONToFile(sult, "city.json")
-		if err != nil {
-			fmt.Println(err)
-		}
-		// ctx.JSON(sult)
-		fmt.Println(sult)
-		ctx.ViewData("city", sult)
 		// ctx.JSON(city)
 	}
+	// 保存成json数据
+	err = saveJSONToFile(sult, "city.json")
+	if err != nil {
+		fmt.Println(err)
+	}
+	// ctx.JSON(sult)
+	fmt.Println(sult)
+	ctx.ViewData("city", sult)
 	ctx.View("index.html")
 }
 
@@ -92,7 +96,11 @@ func home(ctx iris.Context) {
 	fmt.Printf("home[%s]\n", ip)
 	city, err := db.FindMap(ip, "CN")
 	if err != nil {
-		ctx.JSON(map[string]string{"status": "0", "msg": "请检查ip地址是否正确"})
+		// ctx.JSON(map[string]string{"status": "0", "msg": "请检查ip地址是否正确"})
+		sult["code"] = 1
+		sult["msg"] = "处理错误"
+		sult["count"] = 1
+		sult["data"] = temp
 	} else {
 		city["status"] = "1"
 		city["ip"] = ip
@@ -102,18 +110,17 @@ func home(ctx iris.Context) {
 		sult["count"] = 1
 		temp = append(temp, city)
 		sult["data"] = temp
-		// 保存成json数据
-		err := saveJSONToFile(sult, "city.json")
-		if err != nil {
-			fmt.Println(err)
-		}
-		// ctx.JSON(sult)
-		fmt.Println(sult)
-		ctx.ViewData("city", sult)
+
 	}
-
+	// 保存成json数据
+	err = saveJSONToFile(sult, "city.json")
+	if err != nil {
+		fmt.Println(err)
+	}
+	// ctx.JSON(sult)
+	fmt.Println(sult)
+	ctx.ViewData("city", sult)
 	ctx.View("index.html")
-
 }
 
 // 用来保存json文件到当前目录下
